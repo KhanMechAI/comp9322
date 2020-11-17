@@ -1,0 +1,1525 @@
+{
+    "swagger": "2.0",
+    "basePath": "/api/v1",
+    "paths": {
+        "/changedetails/changenames": {
+            "put": {
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                },
+                "description": "Resets user's names",
+                "operationId": "put_change_names",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Change%20Names"
+                        }
+                    }
+                ],
+                "tags": [
+                    "change user details"
+                ]
+            }
+        },
+        "/changedetails/changepwd": {
+            "put": {
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable entity"
+                    },
+                    "411": {
+                        "description": "Length required"
+                    },
+                    "200": {
+                        "description": "Successful"
+                    }
+                },
+                "description": "Resets password",
+                "operationId": "put_change_pwd",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Change%20Password"
+                        }
+                    }
+                ],
+                "tags": [
+                    "change user details"
+                ]
+            }
+        },
+        "/deleteaccount": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                },
+                "description": "delete user account",
+                "operationId": "get_delete_account",
+                "tags": [
+                    "deleteaccount"
+                ]
+            }
+        },
+        "/exportfolio": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                },
+                "operationId": "get_export_portfolio",
+                "tags": [
+                    "exportfolio"
+                ]
+            }
+        },
+        "/forgotuser": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    },
+                    "411": {
+                        "description": "Length required"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                },
+                "description": "Send OTP to registered email",
+                "operationId": "reset_user_password",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Forgot%20User%20Email"
+                        }
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "forgot user password"
+                ]
+            },
+            "put": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "description": "Resets password for user using OTP",
+                "operationId": "reset_user_password",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Forgot%20User"
+                        }
+                    }
+                ],
+                "tags": [
+                    "forgot user password"
+                ]
+            }
+        },
+        "/leaderboard/all": {
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "PortfolioPrice doesn't exist"
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "schema": {
+                            "$ref": "#/definitions/Leaderboard"
+                        }
+                    }
+                },
+                "description": "returns basic detail of all portfolios",
+                "operationId": "get_top_investors_all",
+                "tags": [
+                    "leaderboard"
+                ]
+            }
+        },
+        "/leaderboard/position": {
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "PortfolioPrice doesn't exist"
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "schema": {
+                            "$ref": "#/definitions/Leaderboard"
+                        }
+                    }
+                },
+                "description": "users positions in leaderboard",
+                "operationId": "get_portfolio_query",
+                "tags": [
+                    "leaderboard"
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "responses": {
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Incorrect password, retry"
+                    },
+                    "200": {
+                        "description": "Successful"
+                    }
+                },
+                "operationId": "login_user",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "tags": [
+                    "login"
+                ]
+            }
+        },
+        "/logout": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                },
+                "operationId": "get_token",
+                "tags": [
+                    "logout"
+                ]
+            }
+        },
+        "/marketorder": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "schema": {
+                            "$ref": "#/definitions/Market%20Order"
+                        }
+                    },
+                    "417": {
+                        "description": "Expectation Failed"
+                    },
+                    "416": {
+                        "description": "Requested Range Not Satisfiable"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "description": "Places a market order",
+                "operationId": "post_trade_stock",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Market%20Order"
+                        }
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "marketorder"
+                ]
+            }
+        },
+        "/portfolio": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "schema": {
+                            "$ref": "#/definitions/Portfolio"
+                        }
+                    }
+                },
+                "description": "Show the user's current portfolio holdings and value",
+                "operationId": "get_portfolio_query",
+                "parameters": [
+                    {
+                        "name": "averagemode",
+                        "in": "query",
+                        "type": "string",
+                        "required": true,
+                        "description": "Type of averaging for portfolio query. Options are 'alltime' or 'moving'.",
+                        "default": "moving",
+                        "enum": [
+                            "moving",
+                            "alltime"
+                        ],
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "portfolios"
+                ]
+            }
+        },
+        "/portfolio/historic": {
+            "get": {
+                "responses": {
+                    "400": {
+                        "description": "Invalid Input"
+                    },
+                    "200": {
+                        "description": "Successful",
+                        "schema": {
+                            "$ref": "#/definitions/Historic%20Portfolios"
+                        }
+                    }
+                },
+                "description": "Show the user's current portfolio holdings and value",
+                "operationId": "get_portfolio_history",
+                "parameters": [
+                    {
+                        "name": "number_of_days",
+                        "in": "query",
+                        "type": "integer",
+                        "description": "The max number of days to retrieve for historic portfolio",
+                        "default": 7
+                    }
+                ],
+                "tags": [
+                    "portfolios"
+                ]
+            }
+        },
+        "/portfolio/simulate": {
+            "parameters": [
+                {
+                    "name": "from",
+                    "in": "query",
+                    "type": "integer",
+                    "description": "UNIX timestamp. Date to simulate from. If not given, default is 4 weeks before date_to."
+                },
+                {
+                    "name": "to",
+                    "in": "query",
+                    "type": "integer",
+                    "description": "UNIX timestamp. Date to simulate to. If not given, default is current date if the current date is after the market close time. If the date_to is before the close time, date_to is the yesterday at market close time"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Successful",
+                        "schema": {
+                            "$ref": "#/definitions/Simulated%20Porfolio%20Performance"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Input"
+                    }
+                },
+                "description": "Show the user's current portfolio holdings and value",
+                "operationId": "get_portfolio_simulation",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "portfolios"
+                ]
+            }
+        },
+        "/refreshtoken": {
+            "put": {
+                "responses": {
+                    "200": {
+                        "description": "Successful"
+                    }
+                },
+                "operationId": "put_token",
+                "tags": [
+                    "refresh token"
+                ]
+            }
+        },
+        "/search/candle": {
+            "parameters": [
+                {
+                    "name": "symbol",
+                    "in": "query",
+                    "type": "string",
+                    "required": true,
+                    "description": "Stock symbol to search."
+                },
+                {
+                    "name": "resolution",
+                    "in": "query",
+                    "type": "string",
+                    "description": "Resolution of data",
+                    "default": "D",
+                    "enum": [
+                        "1",
+                        "5",
+                        "15",
+                        "30",
+                        "60",
+                        "D",
+                        "W",
+                        "M"
+                    ],
+                    "collectionFormat": "multi"
+                },
+                {
+                    "name": "from",
+                    "in": "query",
+                    "type": "integer",
+                    "description": "UNIX timestamp. Interval initial value."
+                },
+                {
+                    "name": "to",
+                    "in": "query",
+                    "type": "integer",
+                    "description": "UNIX timestamp. Interval end value."
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Candles"
+                        }
+                    },
+                    "404": {
+                        "description": "Symbol not found"
+                    }
+                },
+                "description": "Candles for a stock over a timeframe",
+                "operationId": "get_candles",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "search"
+                ]
+            }
+        },
+        "/search/details/{stock_symbol}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Stock%20Details"
+                        }
+                    },
+                    "404": {
+                        "description": "Symbol not found"
+                    }
+                },
+                "description": "Gets details for the specified stock",
+                "operationId": "stock_details",
+                "parameters": [
+                    {
+                        "name": "stock_symbol",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The stock symbol associated with the company"
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "search"
+                ]
+            }
+        },
+        "/search/{name}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Stock%20Name"
+                        }
+                    }
+                },
+                "description": "Partial name search for stocks and crypto.",
+                "operationId": "get_stock_search",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name or partial name of the stock symbol or company name"
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "search"
+                ]
+            }
+        },
+        "/signup": {
+            "post": {
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable entity"
+                    },
+                    "411": {
+                        "description": "Length required"
+                    },
+                    "403": {
+                        "description": "Already exists"
+                    },
+                    "201": {
+                        "description": "Successful"
+                    }
+                },
+                "description": "Creates a new user",
+                "operationId": "create_new_user",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Signup"
+                        }
+                    }
+                ],
+                "tags": [
+                    "signup"
+                ]
+            }
+        },
+        "/transaction": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Transactions"
+                        }
+                    }
+                },
+                "description": "All transactions for a user",
+                "operationId": "get_transaction_query",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/user/details": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/User%20Details"
+                        }
+                    }
+                },
+                "description": "Detailed user details",
+                "operationId": "get_user_query",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "view user details"
+                ]
+            }
+        },
+        "/user/info": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/User%20Information"
+                        }
+                    }
+                },
+                "description": "Basic user details",
+                "operationId": "get_user_info_query",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "view user details"
+                ]
+            }
+        },
+        "/watchlist": {
+            "post": {
+                "responses": {
+                    "404": {
+                        "description": "Symbol not found"
+                    },
+                    "201": {
+                        "description": "Entry created"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Symbol"
+                        }
+                    }
+                },
+                "description": "Gets details for the specified stock",
+                "operationId": "post_watchlist",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Symbol"
+                        }
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "security": [
+                    {
+                        "TOKEN-BASED": []
+                    }
+                ],
+                "tags": [
+                    "watchlist"
+                ]
+            },
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "Not in watchlist"
+                    },
+                    "404": {
+                        "description": "Symbol not found"
+                    },
+                    "201": {
+                        "description": "Removed from watchlist"
+                    }
+                },
+                "description": "Gets details for the specified stock",
+                "operationId": "delete_watchlist",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Symbol"
+                        }
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "security": [
+                    {
+                        "TOKEN-BASED": []
+                    }
+                ],
+                "tags": [
+                    "watchlist"
+                ]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Watchlist"
+                        }
+                    }
+                },
+                "description": "Gets details for the specified stock",
+                "operationId": "get_watchlist",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "security": [
+                    {
+                        "TOKEN-BASED": []
+                    }
+                ],
+                "tags": [
+                    "watchlist"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "SimvestrAPI",
+        "version": "0.01",
+        "description": "Simvestr api"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "TOKEN-BASED": {
+            "name": "API-TOKEN",
+            "in": "header",
+            "type": "apiKey"
+        }
+    },
+    "tags": [
+        {
+            "name": "signup",
+            "description": "Back-end API for new user signup"
+        },
+        {
+            "name": "login",
+            "description": "Generates a JWT, sets a cookie in browser"
+        },
+        {
+            "name": "logout",
+            "description": "Deletes the cookie from browser"
+        },
+        {
+            "name": "forgot user password",
+            "description": "Back-end API User signup and authentication"
+        },
+        {
+            "name": "change user details",
+            "description": "Back-end API for changing user details - Name and Password"
+        },
+        {
+            "name": "view user details",
+            "description": "Demo api for querying users"
+        },
+        {
+            "name": "search",
+            "description": "Search stocks"
+        },
+        {
+            "name": "watchlist",
+            "description": "Query , add and remove stocks from a users watch list."
+        },
+        {
+            "name": "marketorder",
+            "description": "Back-end API for placing market-orders"
+        },
+        {
+            "name": "portfolios",
+            "description": "Api for viewing Portfolios"
+        },
+        {
+            "name": "transactions",
+            "description": "All transactions for a user"
+        },
+        {
+            "name": "leaderboard",
+            "description": "query for leaderboard"
+        },
+        {
+            "name": "exportfolio",
+            "description": "Back-end API for exporting portfolio to csv file"
+        },
+        {
+            "name": "deleteaccount",
+            "description": "Back-end API for deleting users account"
+        },
+        {
+            "name": "refresh token",
+            "description": "Resets token cookie in browser"
+        }
+    ],
+    "definitions": {
+        "Signup": {
+            "required": [
+                "email",
+                "first_name",
+                "last_name",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "test@test.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "pass1234"
+                },
+                "first_name": {
+                    "type": "string",
+                    "description": "User first name",
+                    "example": "Brett"
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "User last name",
+                    "example": "Lee"
+                }
+            },
+            "type": "object"
+        },
+        "Login": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "test@test.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "pass1234"
+                }
+            },
+            "type": "object"
+        },
+        "Forgot User Email": {
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "test@test.com"
+                }
+            },
+            "type": "object"
+        },
+        "Forgot User": {
+            "required": [
+                "OTP",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "test@test.com"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "pass1234"
+                },
+                "OTP": {
+                    "type": "string",
+                    "description": "One time password",
+                    "example": "1234"
+                }
+            },
+            "type": "object"
+        },
+        "Change Names": {
+            "required": [
+                "first_name",
+                "last_name"
+            ],
+            "properties": {
+                "first_name": {
+                    "type": "string",
+                    "description": "User first name",
+                    "example": "Brett"
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "User last name",
+                    "example": "Lee"
+                }
+            },
+            "type": "object"
+        },
+        "Change Password": {
+            "required": [
+                "password"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "description": "User password",
+                    "example": "pass1234"
+                }
+            },
+            "type": "object"
+        },
+        "User Details": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/User"
+                },
+                {
+                    "$ref": "#/definitions/Portfolio"
+                },
+                {
+                    "$ref": "#/definitions/Watchlist"
+                },
+                {
+                    "properties": {
+                        "transactions": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Transaction"
+                            }
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "User": {
+            "required": [
+                "email",
+                "first_name",
+                "last_name"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "test@test.com"
+                },
+                "first_name": {
+                    "type": "string",
+                    "description": "User first name",
+                    "example": "Brett"
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "User last name",
+                    "example": "Lee"
+                }
+            },
+            "type": "object"
+        },
+        "Portfolio": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Portfolio name",
+                    "example": "John Doe's Portfolio"
+                },
+                "balance": {
+                    "type": "number",
+                    "description": "Current cash balance",
+                    "example": 55000.0
+                },
+                "prev_balance": {
+                    "type": "number",
+                    "description": "Previous closing cash balance of portfolio",
+                    "example": 85000
+                },
+                "prev_investment_value": {
+                    "type": "number",
+                    "description": "Previous investment value of portfolio",
+                    "example": 30000
+                },
+                "total_value": {
+                    "type": "number",
+                    "description": "The sum of the current cash balance and the value of the current holdings",
+                    "example": 55500.0
+                },
+                "total_return": {
+                    "type": "number",
+                    "description": "Total portfolio return",
+                    "example": 500.0
+                },
+                "portfolio": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Value Model"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Value Model": {
+            "required": [
+                "symbol"
+            ],
+            "properties": {
+                "symbol": {
+                    "type": "string",
+                    "description": "Stock symbol",
+                    "example": "AAPL"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "description": "Number of stocks",
+                    "example": 5
+                },
+                "current": {
+                    "type": "number",
+                    "description": "Current price",
+                    "example": 101.0
+                },
+                "previous": {
+                    "type": "number",
+                    "description": "Previous close price",
+                    "example": 101.0
+                },
+                "value": {
+                    "type": "number",
+                    "description": "Value of the trade or stock balance",
+                    "example": 500.0
+                },
+                "return": {
+                    "type": "number",
+                    "description": "Absolute profit or loss of investment",
+                    "example": 50.0
+                },
+                "buy": {
+                    "$ref": "#/definitions/Buy and Sell Model"
+                },
+                "sell": {
+                    "$ref": "#/definitions/Buy and Sell Model"
+                }
+            },
+            "type": "object"
+        },
+        "Buy and Sell Model": {
+            "properties": {
+                "weighted_average": {
+                    "type": "number",
+                    "description": "Weighted average of the buy or sell price",
+                    "example": 50.0
+                },
+                "weighted_average_fee": {
+                    "type": "number",
+                    "description": "Weighted average of the fee's",
+                    "example": 3.5
+                },
+                "total": {
+                    "type": "number",
+                    "example": 500.0
+                }
+            },
+            "type": "object"
+        },
+        "Watchlist": {
+            "properties": {
+                "watchlist": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Watchlist Item"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Watchlist Item": {
+            "required": [
+                "name",
+                "symbol"
+            ],
+            "properties": {
+                "o": {
+                    "type": "number",
+                    "description": "Open price",
+                    "example": 100.0
+                },
+                "h": {
+                    "type": "number",
+                    "description": "High price",
+                    "example": 110.0
+                },
+                "l": {
+                    "type": "number",
+                    "description": "Low price",
+                    "example": 95.0
+                },
+                "c": {
+                    "type": "number",
+                    "description": "Current price",
+                    "example": 101.0
+                },
+                "pc": {
+                    "type": "number",
+                    "description": "Previous close price",
+                    "example": 101.0
+                },
+                "t": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1569297600
+                },
+                "symbol": {
+                    "type": "string",
+                    "description": "Stock symbol",
+                    "example": "AAPL"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Stock name",
+                    "example": "Apple Inc."
+                },
+                "date_added": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1569297600
+                }
+            },
+            "type": "object"
+        },
+        "Transaction": {
+            "required": [
+                "quote",
+                "symbol"
+            ],
+            "properties": {
+                "symbol": {
+                    "type": "string",
+                    "description": "Stock symbol",
+                    "example": "AAPL"
+                },
+                "quote": {
+                    "type": "number",
+                    "description": "Quote price of the stock",
+                    "example": 100.0
+                },
+                "timestamp": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1569297600
+                },
+                "quantity": {
+                    "type": "integer",
+                    "description": "Number of stocks",
+                    "example": 5
+                },
+                "fee": {
+                    "type": "number",
+                    "description": "Fee of transaction",
+                    "example": 7.5
+                }
+            },
+            "type": "object"
+        },
+        "User Information": {
+            "required": [
+                "email",
+                "first_name",
+                "last_name"
+            ],
+            "properties": {
+                "first_name": {
+                    "type": "string",
+                    "description": "User first name",
+                    "example": "Brett"
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "User last name",
+                    "example": "Lee"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "User email",
+                    "example": "test@test.com"
+                }
+            },
+            "type": "object"
+        },
+        "Stock Details": {
+            "required": [
+                "name",
+                "symbol",
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Stock type",
+                    "example": "stock",
+                    "enum": [
+                        "stock",
+                        "crypto"
+                    ]
+                },
+                "symbol": {
+                    "type": "string",
+                    "description": "Stock symbol",
+                    "example": "AAPL"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Stock name",
+                    "example": "Apple Inc."
+                },
+                "industry": {
+                    "type": "string",
+                    "description": "Industry classification",
+                    "example": "Technology"
+                },
+                "exchange": {
+                    "type": "string",
+                    "description": "Listed exchange",
+                    "example": "NASDAQ/NMS"
+                },
+                "logo": {
+                    "type": "string",
+                    "description": "Logo image",
+                    "example": "https://static.finnhub.io/logo/87cb30d8-80df-11ea-8951-00000000092a.png"
+                },
+                "marketCapitalization": {
+                    "type": "number",
+                    "description": "Market capitalisation",
+                    "example": 1415993
+                },
+                "quote": {
+                    "$ref": "#/definitions/Quote"
+                }
+            },
+            "type": "object"
+        },
+        "Quote": {
+            "properties": {
+                "o": {
+                    "type": "number",
+                    "description": "Open price",
+                    "example": 100.0
+                },
+                "h": {
+                    "type": "number",
+                    "description": "High price",
+                    "example": 110.0
+                },
+                "l": {
+                    "type": "number",
+                    "description": "Low price",
+                    "example": 95.0
+                },
+                "c": {
+                    "type": "number",
+                    "description": "Current price",
+                    "example": 101.0
+                },
+                "pc": {
+                    "type": "number",
+                    "description": "Previous close price",
+                    "example": 101.0
+                },
+                "t": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1569297600
+                }
+            },
+            "type": "object"
+        },
+        "Stock Name": {
+            "required": [
+                "name",
+                "symbol"
+            ],
+            "properties": {
+                "symbol": {
+                    "type": "string",
+                    "description": "Stock symbol",
+                    "example": "AAPL"
+                },
+                "display_symbol": {
+                    "type": "string",
+                    "description": "The display symbol of the stock or crypto",
+                    "example": "APPL"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Stock name",
+                    "example": "Apple Inc."
+                }
+            },
+            "type": "object"
+        },
+        "Candles": {
+            "properties": {
+                "o": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "description": "Open price",
+                        "example": 100.0
+                    }
+                },
+                "h": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "description": "High price",
+                        "example": 110.0
+                    }
+                },
+                "l": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "description": "Low price",
+                        "example": 95.0
+                    }
+                },
+                "c": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "description": "Close price",
+                        "example": 101.0
+                    }
+                },
+                "t": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "description": "Unix timestamp",
+                        "example": 1569297600
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Symbol": {
+            "required": [
+                "symbol"
+            ],
+            "properties": {
+                "symbol": {
+                    "type": "string",
+                    "description": "Stock symbol",
+                    "example": "AAPL"
+                }
+            },
+            "type": "object"
+        },
+        "Market Order": {
+            "required": [
+                "quantity",
+                "symbol",
+                "trade_type"
+            ],
+            "properties": {
+                "symbol": {
+                    "type": "string",
+                    "description": "Stock symbol",
+                    "example": "AAPL"
+                },
+                "quote": {
+                    "type": "number",
+                    "description": "Current price",
+                    "example": 101.0
+                },
+                "trade_type": {
+                    "type": "string",
+                    "description": "Stock symbol for transaction",
+                    "example": "buy",
+                    "enum": [
+                        "buy",
+                        "sell"
+                    ]
+                },
+                "quantity": {
+                    "type": "integer",
+                    "description": "Quote price per share of stock",
+                    "example": 5
+                }
+            },
+            "type": "object"
+        },
+        "Historic Portfolios": {
+            "properties": {
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Historic Portfolio"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Historic Portfolio": {
+            "properties": {
+                "close_balance": {
+                    "type": "number",
+                    "description": "Closing cash balance",
+                    "example": 45000
+                },
+                "investment_value": {
+                    "type": "number",
+                    "description": "Closing investment value",
+                    "example": 55000
+                },
+                "total_value": {
+                    "type": "number",
+                    "example": 100000
+                },
+                "timestamp": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1569297600
+                }
+            },
+            "type": "object"
+        },
+        "Simulated Porfolio Performance": {
+            "properties": {
+                "simulation": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Historic Portfolio"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Transactions": {
+            "properties": {
+                "transactions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Transaction"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "Leaderboard": {
+            "properties": {
+                "nominal": {
+                    "type": "integer",
+                    "description": "screen position after sorting in value order",
+                    "example": 21
+                },
+                "ordinal": {
+                    "type": "string",
+                    "description": "users actual position - not just screen position",
+                    "example": "23rd"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}
